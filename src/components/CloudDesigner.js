@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 
+import { arrayToObjectState, objectStateToArray } from 'lib/state';
+
 import Artboard from 'components/Artboard';
 import ArtboardLayout from 'components/ArtboardLayout';
-import OptionsPanel from 'components/OptionsPanel';
+import AccountOptions from 'components/AccountOptions';
+import ImageOptions from 'components/ImageOptions';
+import TextOptions from 'components/TextOptions';
 import CloudImage from 'components/CloudImage';
+
+const DEFAULT_ACCOUNT_OPTIONS = {
+  cloudName: 'fay',
+  imageId: 'blog-social-card-1.0'
+}
 
 const DEFAULT_IMAGE_OPTIONS = {
   w: 1280,
@@ -37,10 +46,30 @@ const DEFAULT_TEXT_OPTIONS_STATE = arrayToObjectState(DEFAULT_TEXT_OPTIONS);
 
 const CloudDesigner = () => {
 
+  const [accountOptions, updateAccountOptions] = useState(DEFAULT_ACCOUNT_OPTIONS);
   const [imageOptions, updateImageOptions] = useState(DEFAULT_IMAGE_OPTIONS);
   const [textOptions, updateTextOptions] = useState(DEFAULT_TEXT_OPTIONS_STATE);
 
   const textOptionsArray = objectStateToArray(textOptions);
+
+  const { cloudName, imageId } = accountOptions;
+
+  /**
+   * handleUpdateAccountOptions
+   */
+
+  function handleUpdateAccountOptions({ optionName, optionValue } = {}) {
+    updateAccountOptions(prev => {
+      return {
+        ...prev,
+        [optionName]: optionValue
+      }
+    });
+  }
+
+  /**
+   * handleOnImageOptionsChange
+   */
 
   function handleOnImageOptionsChange({ optionName, optionValue } = {}) {
     updateImageOptions(prev => {
@@ -51,36 +80,72 @@ const CloudDesigner = () => {
     });
   }
 
+  /**
+   * handleOnTextOptionschange
+   */
+
+  function handleOnTextOptionschange({ panelId, optionName, optionValue }) {
+    const textIndex = panelId.replace('text-', '');
+    const optionNameSplit = optionName.split('-');
+    const textStateCategory = optionNameSplit[0];
+
+    updateTextOptions(prev => {
+      const newState = {
+        ...prev,
+        [textIndex]: {
+          ...prev[textIndex]
+        }
+      }
+
+      if ( textStateCategory === 'text' ) {
+        newState[textIndex] = {
+          ...newState[textIndex],
+          text: optionValue
+        }
+      } else if (optionNameSplit[1]) {
+        newState[textIndex] = {
+          ...newState[textIndex],
+          [textStateCategory]: {
+            ...newState[textIndex][textStateCategory],
+            [optionNameSplit[1]]: optionValue
+          }
+        }
+      }
+
+      return newState
+    })
+  }
+
   return (
     <Artboard className="cloud-designer">
-      <ArtboardLayout>
-        <CloudImage cloudName="fay" imageId="blog-social-card-1.0" options={imageOptions} text={textOptionsArray} />
-      </ArtboardLayout>
+
       <div className="artboard-child">
-        <OptionsPanel id="image" options={imageOptions} onChange={handleOnImageOptionsChange} />
+        <h2 className="artboard-header sr-only">Account Options</h2>
+        <AccountOptions id="account" options={accountOptions} onChange={handleUpdateAccountOptions} />
       </div>
+
+      <ArtboardLayout>
+        <CloudImage cloudName={cloudName} imageId={imageId} options={imageOptions} text={textOptionsArray} />
+      </ArtboardLayout>
+
+      <div className="artboard-child">
+        <h2 className="artboard-header">Image Options</h2>
+        <ImageOptions id="image" options={imageOptions} onChange={handleOnImageOptionsChange} />
+      </div>
+
+      { Array.isArray(textOptionsArray) && textOptionsArray.map((options, index) => {
+        const id = `text-${index}`;
+        return (
+          <div key={id} className="artboard-child">
+            <h2 className="artboard-header">Text Options {index + 1}</h2>
+            <TextOptions id={id} options={options} onChange={handleOnTextOptionschange} />
+          </div>
+        )
+      })}
     </Artboard>
   )
 }
 
 export default CloudDesigner;
 
-/**
- * arrayToObjectState
- */
-
-function arrayToObjectState(array) {
-  const state = {};
-  array.forEach((item, index) => state[index] = item);
-  return state;
-}
-
-/**
- * objectStateToArray
- */
-
-function objectStateToArray(objectState) {
-  const keys = Object.keys(objectState).sort();
-  return keys.map(key => objectState[key]);
-}
 

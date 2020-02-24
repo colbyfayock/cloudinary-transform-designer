@@ -1,19 +1,38 @@
 $artboard-max-width: 50em;
 
 .artboard {
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
   background-color: darken($color-gray9, 5);
   padding: 2em;
+
+  figure {
+    margin: 0;
+  }
+
+  pre {
+    color: $color-gray2;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    white-space: pre;
+    word-wrap: normal;
+    background-color: $color-gray9;
+    padding: 1em;
+    margin: 0;
+  }
+
 }
 
 .artboard-child {
 
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0,0,0,.25);
   max-width: $artboard-max-width;
+  background-color: darken($color-gray9, 10);
+  padding: 1em;
+  box-shadow: 0 4px 6px rgba(0,0,0,.25);
   margin: 0 auto 2em;
 
   &:last-child {
@@ -22,7 +41,16 @@ $artboard-max-width: 50em;
 
 }
 
+.artboard-header {
+  color: $color-gray2;
+  font-weight: normal;
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
 .artboard-layout {
+
+  padding: 0;
 
   img {
     display: block;

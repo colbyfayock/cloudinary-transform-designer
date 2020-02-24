@@ -13,7 +13,16 @@ const CloudImage = ({cloudName, imageId, options = {}, text = [] }) => {
 
   return (
     <span className="cloud-image">
-      <img src={imageUrl} alt="Artboard Design" />
+      <figure>
+        <img src={imageUrl} alt="Artboard Design" />
+        <figcaption>
+<pre>
+<code>
+{ imageUrl }
+</code>
+</pre>
+        </figcaption>
+      </figure>
     </span>
   );
 

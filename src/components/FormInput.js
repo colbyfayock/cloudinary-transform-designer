@@ -1,28 +1,18 @@
 import React from 'react';
 
-const FormInput = ({ children, className, id, name, type = 'text', onChange, ...props }) => {
+import { useClassName, useFormInput } from 'hooks';
 
-  let formInputClassName = 'form-input';
+const FormInput = ({ children, className, id: selectId, name: selectName, type = 'text', onChange, ...props }) => {
 
-  if ( className ) {
-    formInputClassName = `${formInputClassName} ${className}`;
-  }
+  const { componentClassName, childClassName } = useClassName({
+    component: 'form-input',
+    additionalParent: className
+  });
 
-  if ( !id && name ) {
-    id = name;
-  }
-
-  if ( !name && id ) {
-    name = id;
-  }
-
-  if ( typeof id === 'undefined' ) {
-    console.warn('Missing ID in FormInput');
-  }
-
-  if ( typeof name === 'undefined' ) {
-    console.warn('Missing ID in FormInput');
-  }
+  const { id, name } = useFormInput({
+    id: selectId,
+    name: selectName
+  });
 
   function handleOnChange(e) {
     if ( typeof onChange === 'function') {
@@ -31,9 +21,9 @@ const FormInput = ({ children, className, id, name, type = 'text', onChange, ...
   }
 
   return (
-    <span className={formInputClassName}>
-      <label className="form-label" for={id}>{ children }</label>
-      <input className="form-input-control" id={id} type={type} name={`${id}-w`} onChange={handleOnChange} {...props} />
+    <span className={componentClassName}>
+      <label className="form-label" htmlFor={id}>{ children }</label>
+      <input className={childClassName('control')} id={id} type={type} name={name} onChange={handleOnChange} {...props} />
     </span>
   );
 
