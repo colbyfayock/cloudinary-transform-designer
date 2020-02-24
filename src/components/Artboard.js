@@ -1,11 +1,15 @@
 import React from 'react';
 
-const Artboard = ({ children }) => {
+const Artboard = ({ children, className }) => {
+  let artboardClassName = 'artboard';
+
+  if ( className ) {
+    artboardClassName = `${artboardClassName} ${className}`;
+  }
+
   return (
-    <section className="artboard">
-      <div className="artboard-layout">
-        { children }
-      </div>
+    <section className={artboardClassName}>
+      { children }
     </section>
   )
 }

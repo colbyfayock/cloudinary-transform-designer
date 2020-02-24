@@ -1,17 +1,28 @@
+$artboard-max-width: 50em;
+
 .artboard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  background-color: $color-gray9;
+  background-color: darken($color-gray9, 5);
   padding: 2em;
 }
 
-.artboard-layout {
+.artboard-child {
 
-  max-width: 50em;
+  width: 100%;
   box-shadow: 0 4px 6px rgba(0,0,0,.25);
-  margin: 0 auto;
+  max-width: $artboard-max-width;
+  margin: 0 auto 2em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+.artboard-layout {
 
   img {
     display: block;

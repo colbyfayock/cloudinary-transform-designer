@@ -64,8 +64,6 @@ export function linesToString(lines = []) {
     const formatOptions = formatToString(format);
     const encodedText = encodeURIComponent(text);
 
-    console.log('formatOptions', formatOptions);
-
     return `${optionsString},l_text:${formatOptions}:${encodedText}`;
   }).join('/');
 }

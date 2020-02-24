@@ -1,0 +1,51 @@
+.options-panel {
+
+  display: flex;
+  background-color: darken($color-gray9, 10);
+  padding: 1em;
+
+  .form-label {
+    color: $color-gray2;
+    font-size: .8em;
+    margin-bottom: .6em;
+  }
+
+  .form-input-control {
+
+    color: $color-gray2;
+    background-color: $color-gray9;
+    border: solid 2px $color-gray9;
+
+    &:focus {
+      outline: none;
+      border: solid 2px $color-purple4;
+      box-shadow: 0 0 8px rgba($color-purple4, .8)
+    }
+
+  }
+
+}
+
+.panel-section-header {
+
+  display: block;
+  overflow: hidden;
+  position: relative;
+  color: $color-gray4;
+  font-size: .8em;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-top: 0;
+
+  &:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    content: '';
+    height: 1px;
+    background-color: $color-gray7;
+    width: 100%;
+    margin: auto 0 auto 1em;
+  }
+
+}

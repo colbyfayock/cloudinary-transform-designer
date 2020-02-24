@@ -1,0 +1,47 @@
+.form {
+
+}
+
+.form-row {
+
+  display: flex;
+  flex-direction: row;
+  margin: 0 -.5em;
+
+  .form-input {
+    flex-grow: 1;
+    padding: 0 .5em;
+  }
+
+}
+
+.form-label {
+  display: block;
+  font-size: .9em;
+  text-align: left;
+  margin-bottom: .4em;
+}
+
+.form-input {
+
+  display: block;
+
+  &,
+  .form-input-control {
+    width: 100%;
+  }
+
+}
+
+.form-input-control {
+
+  &[type="text"],
+  &[type="number"] {
+    font-size: 1em;
+    background-color: white;
+    border: solid 2px white;
+    padding: .4em;
+    border-radius: .2em;
+  }
+
+}
