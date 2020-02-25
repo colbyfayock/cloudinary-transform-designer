@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName } from 'hooks';
 
@@ -34,5 +35,15 @@ const Button = ({ children, className, to, onClick }) => {
   )
 
 };
+
+Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string,
+  to: PropTypes.string,
+  onClick: PropTypes.func
+}
 
 export default Button;

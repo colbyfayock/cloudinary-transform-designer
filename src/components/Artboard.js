@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName } from 'hooks';
 
@@ -13,6 +14,14 @@ const Artboard = ({ children, className }) => {
       { children }
     </section>
   )
+}
+
+Artboard.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string
 }
 
 export default Artboard;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName, useFormInput } from 'hooks';
 
@@ -27,6 +28,18 @@ const FormInput = ({ children, className, id: selectId, name: selectName, type =
     </span>
   );
 
+}
+
+FormInput.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default FormInput;

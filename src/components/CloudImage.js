@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { contructCloudinaryUrl } from 'lib/cloudinary';
 
@@ -26,6 +27,13 @@ const CloudImage = ({cloudName, imageId, options = {}, text = [] }) => {
     </span>
   );
 
+}
+
+CloudImage.propTypes = {
+  cloudName: PropTypes.string,
+  imageId: PropTypes.string,
+  options: PropTypes.object,
+  text: PropTypes.array
 }
 
 export default CloudImage;

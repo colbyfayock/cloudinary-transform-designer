@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   TRANSFORM_WIDTH,
@@ -134,6 +135,12 @@ const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
     </Form>
   );
 
+}
+
+TextOptions.propTypes = {
+  id: PropTypes.string,
+  options: PropTypes.object,
+  onChange: PropTypes.func
 }
 
 export default TextOptions;

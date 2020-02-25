@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName } from 'hooks';
 
@@ -19,9 +20,9 @@ const ArtboardHeader = ({ children, className, actions }) => {
       </h2>
       { hasActions && (
         <ul className={childClassName('actions')}>
-          { actions.map(({label, icon, onClick}) => {
+          { actions.map(({label, icon, onClick}, index) => {
             return (
-              <li>
+              <li key={`${childClassName('actions')}-${index}`}>
                 <Button onClick={onClick}>
                   { icon }
                   <span className="sr-only">{ label }</span>
@@ -34,5 +35,14 @@ const ArtboardHeader = ({ children, className, actions }) => {
     </div>
   )
 };
+
+ArtboardHeader.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string,
+  actions: PropTypes.array
+}
 
 export default ArtboardHeader;

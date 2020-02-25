@@ -31,7 +31,11 @@ const Layout = ({ children, pageName }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  pageName: PropTypes.string
 }
 
 export default Layout;

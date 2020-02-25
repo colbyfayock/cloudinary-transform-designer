@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PanelRow from 'components/PanelRow';
 import PanelSection from 'components/PanelSection';
@@ -43,6 +44,12 @@ const ImageOptions = ({ id, options = {}, onChange }) => {
     </Form>
   );
 
+}
+
+ImageOptions.propTypes = {
+  id: PropTypes.string,
+  options: PropTypes.object,
+  onChange: PropTypes.func
 }
 
 export default ImageOptions;

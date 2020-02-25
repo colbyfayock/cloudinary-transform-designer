@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 
 import { arrayToObjectState, objectStateToArray } from 'lib/state';
@@ -201,6 +202,8 @@ const CloudDesigner = ({ className }) => {
   )
 }
 
+CloudDesigner.propTypes = {
+  className: PropTypes.string
+}
+
 export default CloudDesigner;
-
-

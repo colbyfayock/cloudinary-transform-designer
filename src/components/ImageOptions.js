@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { TRANSFORM_WIDTH, TRANSFORM_HEIGHT, TRANSFORM_CROP, TRANSFORM_QUALITY, TRANSFORM_FORMAT } from 'data/transformations';
 
@@ -71,6 +72,12 @@ const ImageOptions = ({ id, options = {}, onChange }) => {
     </Form>
   );
 
+}
+
+ImageOptions.propTypes = {
+  id: PropTypes.string,
+  options: PropTypes.object,
+  onChange: PropTypes.func
 }
 
 export default ImageOptions;

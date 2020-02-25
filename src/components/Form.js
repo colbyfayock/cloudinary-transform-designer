@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName } from 'hooks';
 
@@ -19,6 +20,15 @@ const Form = ({ children, className, onChange }) => {
       { children }
     </form>
   );
+}
+
+Form.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 export default Form;

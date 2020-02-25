@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useClassName, useFormInput } from 'hooks';
 
@@ -31,6 +32,19 @@ const FormSelect = ({ children, className, id: selectId, name: selectName, value
     </span>
   );
 
+}
+
+FormSelect.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+  options: PropTypes.array,
+  onChange: PropTypes.func
 }
 
 export default FormSelect;
