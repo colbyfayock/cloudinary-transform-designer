@@ -49,7 +49,7 @@ const ImageOptions = ({ id, options = {}, onChange }) => {
 
         </PanelSection>
 
-        <PanelSection>
+        <PanelSection className="image-options-format">
 
           <PanelSectionHeader>Format</PanelSectionHeader>
 

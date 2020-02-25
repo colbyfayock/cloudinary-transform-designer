@@ -12,7 +12,10 @@ const IndexPage = () => {
         <title>Cloudinary Transform Designer</title>
       </Helmet>
       <Container type="full">
-        <CloudDesigner />
+        <CloudDesigner accountOptions={{
+          cloudName: process.env.GATSBY_ACCOUNT_CLOUD_NAME,
+          imageId: process.env.GATSBY_ACCOUNT_IMAGE_ID
+        }} />
       </Container>
     </Layout>
   );

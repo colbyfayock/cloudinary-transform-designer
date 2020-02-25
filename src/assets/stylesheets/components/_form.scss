@@ -58,8 +58,25 @@
 .form-input-control {
 
   &[type="text"],
-  &[type="number"] {
+  &[type="number"],
+  &[type="color"] {
     @extend %form-control;
+  }
+
+  &[type="color"] {
+
+    overflow: hidden;
+    border-radius: .2em;
+
+    &,
+    &::-webkit-color-swatch-wrapper,
+    &::-webkit-color-swatch {
+      background: none;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+
   }
 
 }

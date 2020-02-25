@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useClassName, useFormInput } from 'hooks';
 
-const FormInput = ({ children, className, id: selectId, name: selectName, type = 'text', onChange, value, ...props }) => {
-
+const FormColor = ({ children, className, id: selectId, name: selectName, onChange, value, ...props }) => {
   const { componentClassName, childClassName } = useClassName({
     component: 'form-input',
     additionalParent: className
@@ -24,13 +23,13 @@ const FormInput = ({ children, className, id: selectId, name: selectName, type =
   return (
     <span className={componentClassName}>
       <label className="form-label" htmlFor={id}>{ children }</label>
-      <input className={childClassName('control')} id={id} type={type} name={name} onChange={handleOnChange} value={value || ''} {...props} />
+      <input className={childClassName('control')} id={id} name={name} type="color" onChange={handleOnChange} value={value || ''} {...props} />
     </span>
   );
 
 }
 
-FormInput.propTypes = {
+FormColor.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -38,8 +37,7 @@ FormInput.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
-  type: PropTypes.string,
   onChange: PropTypes.func
 }
 
-export default FormInput;
+export default FormColor;

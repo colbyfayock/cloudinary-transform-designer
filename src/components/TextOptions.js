@@ -14,12 +14,19 @@ import {
   TRANSFORM_TEXT_WEIGHT
 } from 'data/transformations';
 
+import { hexToCloudinaryRgb, cloudinaryRgbToHex } from 'lib/cloudinary';
+
 import PanelRow from 'components/PanelRow';
 import PanelSection from 'components/PanelSection';
 import PanelSectionHeader from 'components/PanelSectionHeader';
 import Form from 'components/Form';
 import FormInput from 'components/FormInput';
+import FormColor from 'components/FormColor';
 import FormSelect from 'components/FormSelect';
+
+const COLOR_INPUTS = [
+  'options-co'
+]
 
 const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
 
@@ -28,8 +35,12 @@ const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
   function handleOnChange(e = {}) {
     const { target = {} } = e;
     const { value: targetValue, name: targetName } = target;
-    const optionValue = targetValue.replace(`${id}-`, '');
     const optionName = targetName.replace(`${id}-`, '');
+    let optionValue = targetValue.replace(`${id}-`, '');
+
+    if ( COLOR_INPUTS.includes(optionName) ) {
+      optionValue = hexToCloudinaryRgb(optionValue);
+    }
 
     const data = {
       panelId: id,
@@ -95,9 +106,9 @@ const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
             <FormSelect name={`${id}-options-${TRANSFORM_GRAVITY.param}`} options={TRANSFORM_GRAVITY.options} value={options.q}>
               { TRANSFORM_GRAVITY.label }
             </FormSelect>
-            <FormInput name={`${id}-options-${TRANSFORM_COLOR.param}`} type={TRANSFORM_COLOR.type} value={options.co}>
+            <FormColor name={`${id}-options-${TRANSFORM_COLOR.param}`} value={cloudinaryRgbToHex(options.co)}>
               { TRANSFORM_COLOR.label }
-            </FormInput>
+            </FormColor>
           </div>
 
         </PanelSection>

@@ -15,11 +15,6 @@ import TextOptions from 'components/TextOptions';
 import CloudImage from 'components/CloudImage';
 import Button from 'components/Button';
 
-const DEFAULT_ACCOUNT_OPTIONS = {
-  cloudName: 'fay',
-  imageId: 'demo-cloudinary-transform-designer'
-}
-
 const DEFAULT_IMAGE_OPTIONS = {
   w: 1280,
   h: 640,
@@ -39,10 +34,10 @@ const DEFAULT_TEXT_OPTION = {
   options: {
     w: 860,
     c: 'fit',
-    co: 'rgb:232129',
-    g: 'south_west',
+    co: 'rgb:5E35B1',
+    g: 'west',
     x: 80,
-    y: 180,
+    y: -60,
   }
 }
 
@@ -50,19 +45,26 @@ const DEFAULT_TEXT_OPTIONS = [DEFAULT_TEXT_OPTION];
 
 const DEFAULT_TEXT_OPTIONS_STATE = arrayToObjectState(DEFAULT_TEXT_OPTIONS);
 
-const CloudDesigner = ({ className }) => {
+const CloudDesigner = ({
+  className,
+  accountOptions: defaultAccountOptions = {},
+  imageOptions: defaultImageOptions = DEFAULT_IMAGE_OPTIONS,
+  textOptions: defaultTextOptions = DEFAULT_TEXT_OPTIONS_STATE
+}) => {
+
   const { componentClassName, childClassName } = useClassName({
     component: 'cloud-designer',
     additionalParent: className
   });
 
-  const [accountOptions, updateAccountOptions] = useState(DEFAULT_ACCOUNT_OPTIONS);
-  const [imageOptions, updateImageOptions] = useState(DEFAULT_IMAGE_OPTIONS);
-  const [textOptions, updateTextOptions] = useState(DEFAULT_TEXT_OPTIONS_STATE);
+  const [accountOptions, updateAccountOptions] = useState(defaultAccountOptions);
+  const [imageOptions, updateImageOptions] = useState(defaultImageOptions);
+  const [textOptions, updateTextOptions] = useState(defaultTextOptions);
 
   const textOptionsArray = objectStateToArray(textOptions);
 
   const { cloudName, imageId } = accountOptions;
+  const hasAccount = cloudName && imageId;
 
   /**
    * handleUpdateAccountOptions
@@ -166,7 +168,15 @@ const CloudDesigner = ({ className }) => {
       </ArtboardChild>
 
       <ArtboardLayout>
-        <CloudImage cloudName={cloudName} imageId={imageId} options={imageOptions} text={textOptionsArray} />
+        {hasAccount && (
+          <CloudImage cloudName={cloudName} imageId={imageId} options={imageOptions} text={textOptionsArray} />
+        )}
+        {!hasAccount && (
+          <ArtboardChild>
+            { !cloudName && (<p>Missing cloudName</p>)}
+            { !imageId && (<p>Missing imageId</p>)}
+          </ArtboardChild>
+        )}
       </ArtboardLayout>
 
       <ArtboardChild>

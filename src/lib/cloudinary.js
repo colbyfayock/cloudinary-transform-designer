@@ -96,3 +96,19 @@ export function formatToString(options = {}) {
     return options[key];
   }).join('_');
 }
+
+/**
+ * hexToCloudinaryRgb
+ */
+
+export function hexToCloudinaryRgb(hex){
+  return hex.replace('#', 'rgb:');
+}
+
+/**
+ * cloudinaryRgbToHex
+ */
+
+export function cloudinaryRgbToHex(rgb){
+  return rgb.replace('rgb:', '#');
+}
