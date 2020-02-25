@@ -12,6 +12,11 @@
   display: flex;
   margin: 0 -.5em 1.5em;
 
+  @include small()  {
+    width: 100%;
+    flex-direction: column;
+  }
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -19,8 +24,20 @@
 }
 
 .panel-section {
+
   flex-grow: 1;
   padding: 0 .5em;
+
+  @include small() {
+
+    margin-bottom: 1.5em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
 }
 
 .panel-section-header {

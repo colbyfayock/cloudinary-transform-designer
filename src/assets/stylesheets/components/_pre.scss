@@ -1,0 +1,18 @@
+$pre-height: 40px;
+
+.pre {
+
+  position: relative;
+  overflow-x: scroll;
+  height: $pre-height;
+
+  pre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    height: $pre-height;
+  }
+
+}

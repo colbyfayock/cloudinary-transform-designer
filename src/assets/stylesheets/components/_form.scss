@@ -8,10 +8,34 @@
   flex-direction: row;
   margin: 0 -.5em;
 
+  @include small()  {
+
+    flex-direction: column;
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
   .form-input,
   .form-select {
+
     flex-grow: 1;
     padding: 0 .5em;
+
+    @include small()  {
+
+      width: 100%;
+      margin-bottom: 1em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+    }
+
   }
 
 }

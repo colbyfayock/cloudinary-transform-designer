@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { contructCloudinaryUrl } from 'lib/cloudinary';
 
+import Pre from 'components/Pre';
+
 const CloudImage = ({cloudName, imageId, options = {}, text = [] }) => {
 
   const imageUrl = contructCloudinaryUrl({
@@ -17,11 +19,9 @@ const CloudImage = ({cloudName, imageId, options = {}, text = [] }) => {
       <figure>
         <img src={imageUrl} alt="Artboard Design" />
         <figcaption>
-<pre>
-<code>
+          <Pre>
 { imageUrl }
-</code>
-</pre>
+          </Pre>
         </figcaption>
       </figure>
     </span>

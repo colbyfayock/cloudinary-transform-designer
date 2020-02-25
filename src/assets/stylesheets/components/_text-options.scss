@@ -1,16 +1,34 @@
 .text-options-size {
+
   width: 5em;
+
+  @include small()  {
+    width: 100%;
+  }
+
 }
 
 .text-options-position {
+
   width: 10em;
+
+  @include small()  {
+    width: 100%;
+  }
+
 }
 
 .text-options-format {
 
   .form-input,
   .form-select {
+
     width: 33.33%;
+
+    @include small()  {
+      width: 100%;
+    }
+
   }
 
 }

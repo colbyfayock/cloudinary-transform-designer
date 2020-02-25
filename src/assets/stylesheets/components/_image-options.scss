@@ -4,7 +4,13 @@
 
   .form-input,
   .form-select {
+
     width: 33.33%;
+
+    @include small()  {
+      width: 100%;
+    }
+
   }
 
 }

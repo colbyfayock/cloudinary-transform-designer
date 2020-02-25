@@ -4,6 +4,10 @@
   color: white;
   background-color: $color-purple6;
 
+  @include small() {
+    padding: 0 1em;
+  }
+
   .container {
     display: flex;
     justify-content: space-between;
