@@ -1,4 +1,5 @@
 # Cloudinary Transform Designer
+A tool to easily design your Cloudinary transforms to determine your configurations.
 
 ## ⚡ Quick Start with Netlify
 
