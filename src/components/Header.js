@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { FaGithub } from 'react-icons/fa';
 
 import Container from 'components/Container';
 
@@ -12,7 +12,9 @@ const Header = () => {
         </p>
         <ul className="header-links">
           <li>
-            <Link to="/">Home</Link>
+            <a href="https://github.com/colbyfayock/cloudinary-transform-designer">
+              <FaGithub /> <span className="sr-only">Github</span>
+            </a>
           </li>
         </ul>
       </Container>

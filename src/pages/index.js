@@ -9,7 +9,7 @@ const IndexPage = () => {
   return (
     <Layout pageName="home">
       <Helmet>
-        <title>Home Page</title>
+        <title>Cloudinary Transform Designer</title>
       </Helmet>
       <Container type="full">
         <CloudDesigner />
