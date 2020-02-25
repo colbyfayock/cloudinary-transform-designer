@@ -1,12 +1,12 @@
 import React from 'react';
 
+import { useClassName } from 'hooks';
+
 const Form = ({ children, className, onChange }) => {
-
-  let formClassName = 'form';
-
-  if ( className ) {
-    formClassName = `${formClassName} ${className}`;
-  }
+  const { componentClassName } = useClassName({
+    component: 'form',
+    additionalParent: className
+  });
 
   function handleOnChange(e) {
     if ( typeof onChange === 'function') {
@@ -15,7 +15,7 @@ const Form = ({ children, className, onChange }) => {
   }
 
   return (
-    <form className={formClassName} onChange={handleOnChange}>
+    <form className={componentClassName} onChange={handleOnChange}>
       { children }
     </form>
   );

@@ -42,10 +42,72 @@ $artboard-max-width: 50em;
 }
 
 .artboard-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.artboard-header-title {
   color: $color-gray2;
   font-weight: normal;
   font-size: 1.2em;
-  margin-top: 0;
+  margin: 0;
+}
+
+.artboard-header-actions {
+
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0;
+  }
+
+  .button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: .2em;
+
+    &,
+    svg {
+      color: $color-gray2;
+      fill: $color-gray2;
+    }
+
+    &:hover {
+
+      &,
+      svg {
+        color: $color-gray1;
+        fill: $color-gray1;
+      }
+
+    }
+
+    &:active {
+
+      &,
+      svg {
+        color: $color-gray3;
+        fill: $color-gray3;
+      }
+
+    }
+
+    svg {
+      display: block;
+      width: 1.4em;
+      height: 1.4em;
+      margin: 0;
+    }
+
+  }
+
 }
 
 .artboard-layout {

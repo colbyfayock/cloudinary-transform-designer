@@ -1,0 +1,64 @@
+.button {
+
+  border: none;
+  padding: 1em 1.2em;
+  outline: none;
+  cursor: pointer;
+
+  &,
+  a,
+  button {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  a,
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+.button-primary {
+
+  background-color: $color-purple7;
+
+  &,
+  a,
+  button {
+    color: white;
+  }
+
+  &:hover {
+    background-color: $color-purple6;
+  }
+
+  &:active {
+    background-color: $color-purple8;
+  }
+
+  &:focus {
+    background-color: $color-purple8;
+    box-shadow: 0 0 8px rgba($color-purple4, .8);
+  }
+
+}
+
+.button-icon-before {
+
+  svg {
+    margin-right: .8em;
+  }
+
+}
+
+.button-icon-after {
+
+  svg {
+    margin-left: .8em;
+  }
+
+}

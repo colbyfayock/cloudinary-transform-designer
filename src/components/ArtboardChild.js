@@ -1,14 +1,15 @@
 import React from 'react';
 
-const ArtboardChild = ({ children, className }) => {
-  let childClassName = 'artboard-child';
+import { useClassName } from 'hooks';
 
-  if ( className ) {
-    childClassName = `${childClassName} ${className}`;
-  }
+const ArtboardChild = ({ children, className }) => {
+  const { componentClassName } = useClassName({
+    component: 'artboard-child',
+    additionalParent: className
+  });
 
   return (
-    <div className={childClassName}>
+    <div className={componentClassName}>
       { children }
     </div>
   )

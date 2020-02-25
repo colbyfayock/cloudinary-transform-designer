@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
+import { FaPlus, FaTimes } from 'react-icons/fa';
 
 import { arrayToObjectState, objectStateToArray } from 'lib/state';
+import { useClassName } from 'hooks';
 
 import Artboard from 'components/Artboard';
 import ArtboardLayout from 'components/ArtboardLayout';
+import ArtboardChild from 'components/ArtboardChild';
+import ArtboardHeader from 'components/ArtboardHeader';
 import AccountOptions from 'components/AccountOptions';
 import ImageOptions from 'components/ImageOptions';
 import TextOptions from 'components/TextOptions';
 import CloudImage from 'components/CloudImage';
+import Button from 'components/Button';
 
 const DEFAULT_ACCOUNT_OPTIONS = {
   cloudName: 'fay',
-  imageId: 'blog-social-card-1.0'
+  imageId: 'demo-cloudinary-transform-designer'
 }
 
 const DEFAULT_IMAGE_OPTIONS = {
@@ -22,29 +27,33 @@ const DEFAULT_IMAGE_OPTIONS = {
   f: 'auto'
 };
 
-const DEFAULT_TEXT_OPTIONS = [
-  {
-    text: 'What is the JAMstack and how do I get started?',
-    format: {
-      font: 'Source Sans Pro',
-      size: 70,
-      lineSpacing: -10,
-      weight: 'semibold'
-    },
-    options: {
-      w: 860,
-      c: 'fit',
-      co: 'rgb:232129',
-      g: 'south_west',
-      x: 80,
-      y: 180,
-    }
+const DEFAULT_TEXT_OPTION = {
+  text: 'Your text here!',
+  format: {
+    font: 'Source Sans Pro',
+    size: 70,
+    lineSpacing: -10,
+    weight: 'semibold'
+  },
+  options: {
+    w: 860,
+    c: 'fit',
+    co: 'rgb:232129',
+    g: 'south_west',
+    x: 80,
+    y: 180,
   }
-];
+}
+
+const DEFAULT_TEXT_OPTIONS = [DEFAULT_TEXT_OPTION];
 
 const DEFAULT_TEXT_OPTIONS_STATE = arrayToObjectState(DEFAULT_TEXT_OPTIONS);
 
-const CloudDesigner = () => {
+const CloudDesigner = ({ className }) => {
+  const { componentClassName, childClassName } = useClassName({
+    component: 'cloud-designer',
+    additionalParent: className
+  });
 
   const [accountOptions, updateAccountOptions] = useState(DEFAULT_ACCOUNT_OPTIONS);
   const [imageOptions, updateImageOptions] = useState(DEFAULT_IMAGE_OPTIONS);
@@ -116,32 +125,78 @@ const CloudDesigner = () => {
     })
   }
 
-  return (
-    <Artboard className="cloud-designer">
+  /**
+   * handleOnAddText
+   */
 
-      <div className="artboard-child">
-        <h2 className="artboard-header sr-only">Account Options</h2>
+  function handleOnAddText() {
+    updateTextOptions(prev => {
+      const prevLength = Object.keys(prev).length;
+      return {
+        ...prev,
+        [prevLength]: DEFAULT_TEXT_OPTION
+      }
+    });
+  }
+
+  /**
+   * handleOnTextRemove
+   */
+
+  function handleOnTextRemove({ index }) {
+    updateTextOptions(prev => {
+      const newStateKeys = Object.keys(prev).filter((key, i) => i !== index);
+      const newState = {};
+
+      newStateKeys.forEach((key, index) => {
+        newState[index] = prev[key];
+      });
+
+      return newState;
+    });
+  }
+
+  return (
+    <Artboard className={componentClassName}>
+
+      <ArtboardChild>
+        <ArtboardHeader className="sr-only">Account Options</ArtboardHeader>
         <AccountOptions id="account" options={accountOptions} onChange={handleUpdateAccountOptions} />
-      </div>
+      </ArtboardChild>
 
       <ArtboardLayout>
         <CloudImage cloudName={cloudName} imageId={imageId} options={imageOptions} text={textOptionsArray} />
       </ArtboardLayout>
 
-      <div className="artboard-child">
-        <h2 className="artboard-header">Image Options</h2>
+      <ArtboardChild>
+        <ArtboardHeader>Image Options</ArtboardHeader>
         <ImageOptions id="image" options={imageOptions} onChange={handleOnImageOptionsChange} />
-      </div>
+      </ArtboardChild>
 
       { Array.isArray(textOptionsArray) && textOptionsArray.map((options, index) => {
         const id = `text-${index}`;
+        const actions = [
+          {
+            label: 'Remove',
+            icon: <FaTimes />,
+            onClick: () => handleOnTextRemove({ index })
+          }
+        ];
         return (
-          <div key={id} className="artboard-child">
-            <h2 className="artboard-header">Text Options {index + 1}</h2>
+          <ArtboardChild key={id}>
+            <ArtboardHeader actions={actions}>Text Options {index + 1}</ArtboardHeader>
             <TextOptions id={id} options={options} onChange={handleOnTextOptionschange} />
-          </div>
+          </ArtboardChild>
         )
       })}
+
+      <ArtboardChild className={childClassName('add-text')}>
+        <Button className="button-icon-after button-primary" onClick={handleOnAddText}>
+          Add New Text Line
+          <FaPlus />
+        </Button>
+      </ArtboardChild>
+
     </Artboard>
   )
 }

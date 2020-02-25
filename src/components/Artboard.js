@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Artboard = ({ children, className }) => {
-  let artboardClassName = 'artboard';
+import { useClassName } from 'hooks';
 
-  if ( className ) {
-    artboardClassName = `${artboardClassName} ${className}`;
-  }
+const Artboard = ({ children, className }) => {
+  const { componentClassName } = useClassName({
+    component: 'artboard',
+    additionalParent: className
+  });
 
   return (
-    <section className={artboardClassName}>
+    <section className={componentClassName}>
       { children }
     </section>
   )
