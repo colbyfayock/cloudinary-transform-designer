@@ -1,4 +1,4 @@
-# Cloudinary Transform Designer
+# 🖼️ Cloudinary Transform Designer
 
 ## ⚡ Quick Start with Netlify
 
