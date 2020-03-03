@@ -6,7 +6,7 @@ import Container from 'components/Container';
 const Header = () => {
   return (
     <header className="header">
-      <Container>
+      <Container type="full">
         <p className="header-title">
           Cloudinary Transform Designer
         </p>

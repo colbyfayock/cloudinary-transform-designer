@@ -17,13 +17,14 @@ body {
 }
 
 .wrapper {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 main {
   display: flex;
+  overflow: hidden;
   text-align: left;
   flex-direction: column;
   padding: 2em 0;

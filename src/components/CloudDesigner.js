@@ -7,6 +7,7 @@ import { useClassName } from 'hooks';
 
 import Artboard from 'components/Artboard';
 import ArtboardLayout from 'components/ArtboardLayout';
+import ArtboardColumn from 'components/ArtboardColumn';
 import ArtboardChild from 'components/ArtboardChild';
 import ArtboardHeader from 'components/ArtboardHeader';
 import AccountOptions from 'components/AccountOptions';
@@ -14,6 +15,7 @@ import ImageOptions from 'components/ImageOptions';
 import TextOptions from 'components/TextOptions';
 import CloudImage from 'components/CloudImage';
 import Button from 'components/Button';
+import Pre from 'components/Pre';
 
 const DEFAULT_IMAGE_OPTIONS = {
   w: 1280,
@@ -159,54 +161,76 @@ const CloudDesigner = ({
     });
   }
 
+  const cloudImageConfig = {
+    cloudName,
+    imageId,
+    options: imageOptions,
+    text: textOptionsArray
+  }
+
   return (
     <Artboard className={componentClassName}>
 
-      <ArtboardChild>
-        <ArtboardHeader className="sr-only">Account Options</ArtboardHeader>
-        <AccountOptions id="account" options={accountOptions} onChange={handleUpdateAccountOptions} />
-      </ArtboardChild>
+      <ArtboardColumn>
 
-      <ArtboardLayout>
-        {hasAccount && (
-          <CloudImage cloudName={cloudName} imageId={imageId} options={imageOptions} text={textOptionsArray} />
-        )}
-        {!hasAccount && (
-          <ArtboardChild>
-            { !cloudName && (<p>Missing cloudName</p>)}
-            { !imageId && (<p>Missing imageId</p>)}
-          </ArtboardChild>
-        )}
-      </ArtboardLayout>
+        <ArtboardLayout>
+          {hasAccount && (
+            <CloudImage {...cloudImageConfig} />
+          )}
+          {!hasAccount && (
+            <ArtboardChild>
+              { !cloudName && (<p>Missing cloudName</p>)}
+              { !imageId && (<p>Missing imageId</p>)}
+            </ArtboardChild>
+          )}
+        </ArtboardLayout>
 
-      <ArtboardChild>
-        <ArtboardHeader>Image Options</ArtboardHeader>
-        <ImageOptions id="image" options={imageOptions} onChange={handleOnImageOptionsChange} />
-      </ArtboardChild>
+        <ArtboardChild className="cloud-designer-config">
+          <ArtboardHeader>Config</ArtboardHeader>
+          <Pre>
+            {JSON.stringify(cloudImageConfig, null, 2) }
+          </Pre>
+        </ArtboardChild>
 
-      { Array.isArray(textOptionsArray) && textOptionsArray.map((options, index) => {
-        const id = `text-${index}`;
-        const actions = [
-          {
-            label: 'Remove',
-            icon: <FaTimes />,
-            onClick: () => handleOnTextRemove({ index })
-          }
-        ];
-        return (
-          <ArtboardChild key={id}>
-            <ArtboardHeader actions={actions}>Text Options {index + 1}</ArtboardHeader>
-            <TextOptions id={id} options={options} onChange={handleOnTextOptionschange} />
-          </ArtboardChild>
-        )
-      })}
+      </ArtboardColumn>
 
-      <ArtboardChild className={childClassName('add-text')}>
-        <Button className="button-icon-after button-primary" onClick={handleOnAddText}>
-          Add New Text Line
-          <FaPlus />
-        </Button>
-      </ArtboardChild>
+      <ArtboardColumn>
+
+        <ArtboardChild>
+          <ArtboardHeader className="sr-only">Account Options</ArtboardHeader>
+          <AccountOptions id="account" options={accountOptions} onChange={handleUpdateAccountOptions} />
+        </ArtboardChild>
+
+        <ArtboardChild>
+          <ArtboardHeader>Image Options</ArtboardHeader>
+          <ImageOptions id="image" options={imageOptions} onChange={handleOnImageOptionsChange} />
+        </ArtboardChild>
+
+        { Array.isArray(textOptionsArray) && textOptionsArray.map((options, index) => {
+          const id = `text-${index}`;
+          const actions = [
+            {
+              label: 'Remove',
+              icon: <FaTimes />,
+              onClick: () => handleOnTextRemove({ index })
+            }
+          ];
+          return (
+            <ArtboardChild key={id}>
+              <ArtboardHeader actions={actions}>Text Options {index + 1}</ArtboardHeader>
+              <TextOptions id={id} options={options} onChange={handleOnTextOptionschange} />
+            </ArtboardChild>
+          )
+        })}
+
+        <ArtboardChild className={childClassName('add-text')}>
+          <Button className="button-icon-after button-primary" onClick={handleOnAddText}>
+            Add New Text Line
+            <FaPlus />
+          </Button>
+        </ArtboardChild>
+
+      </ArtboardColumn>
 
     </Artboard>
   )

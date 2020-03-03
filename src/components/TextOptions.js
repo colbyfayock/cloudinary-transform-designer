@@ -52,7 +52,7 @@ const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
       onChange(data, e);
     }
   }
-
+console.log('options', options)
   return (
     <Form className="panel text-options" onChange={handleOnChange}>
 
@@ -103,7 +103,7 @@ const TextOptions = ({ id, options: textOptions = {}, onChange }) => {
             <FormSelect name={`${id}-options-${TRANSFORM_CROP.param}`} options={TRANSFORM_CROP.options} value={options.c}>
               { TRANSFORM_CROP.label }
             </FormSelect>
-            <FormSelect name={`${id}-options-${TRANSFORM_GRAVITY.param}`} options={TRANSFORM_GRAVITY.options} value={options.q}>
+            <FormSelect name={`${id}-options-${TRANSFORM_GRAVITY.param}`} options={TRANSFORM_GRAVITY.options} value={options.g}>
               { TRANSFORM_GRAVITY.label }
             </FormSelect>
             <FormColor name={`${id}-options-${TRANSFORM_COLOR.param}`} value={cloudinaryRgbToHex(options.co)}>

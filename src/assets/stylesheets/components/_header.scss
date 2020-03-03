@@ -3,6 +3,7 @@
   width: 100%;
   color: white;
   background-color: $color-purple6;
+  padding: 0 2em;
 
   @include small() {
     padding: 0 1em;
