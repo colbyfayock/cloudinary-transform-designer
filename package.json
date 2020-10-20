@@ -34,9 +34,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/colbyfayock/gatsby-starter-sass"
+    "url": "https://github.com/colbyfayock/cloudinary-transform-designer"
   },
   "bugs": {
-    "url": "https://github.com/colbyfayock/gatsby-starter-sass/issues"
+    "url": "https://github.com/colbyfayock/cloudinary-transform-designer/issues"
   }
 }
