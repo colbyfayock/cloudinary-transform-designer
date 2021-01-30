@@ -4,6 +4,7 @@
   "version": "0.1.2",
   "author": "Colby Fayock <hello@colbyfayock.com>",
   "dependencies": {
+    "cloudinary-transformer": "^1.0.0",
     "gatsby": "^2.31.1",
     "gatsby-plugin-react-helmet": "^3.9.0",
     "gatsby-plugin-resolve-src": "^2.1.0",

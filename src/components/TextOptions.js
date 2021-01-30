@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { hexToCloudinaryRgb, cloudinaryRgbToHex } from 'cloudinary-transformer';
 
 import {
   TRANSFORM_WIDTH,
@@ -13,8 +14,6 @@ import {
   TRANSFORM_TEXT_LINESPACING,
   TRANSFORM_TEXT_WEIGHT
 } from 'data/transformations';
-
-import { hexToCloudinaryRgb, cloudinaryRgbToHex } from 'lib/cloudinary';
 
 import PanelRow from 'components/PanelRow';
 import PanelSection from 'components/PanelSection';

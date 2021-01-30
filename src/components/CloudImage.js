@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { contructCloudinaryUrl } from 'lib/cloudinary';
+import { contructCloudinaryUrl } from 'cloudinary-transformer';
 
 import Pre from 'components/Pre';
 
